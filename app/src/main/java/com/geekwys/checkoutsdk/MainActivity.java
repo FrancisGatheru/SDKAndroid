@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 /**
 * @author evil twins
-* */
+*/
 public class MainActivity extends AppCompatActivity {
 
     @Override
