@@ -59,7 +59,7 @@ public class CheckoutSdk {
     }
 
     /**
-     * formulate post-charge paylaod
+     * formulate post-charge payload
      */
     public String postCharge(String merchantTransactionID, String checkoutRequestID, String chargeMsisdn,
                              String chargeAmount, String currencyCode, String payerModeID, String languageCode
@@ -93,6 +93,27 @@ public class CheckoutSdk {
             n.printStackTrace();
         }
         return queryStatus.toString();
+    }
+
+    /**
+     * formulate capture-payment payload
+     */
+    public String acknowledgePayment(String checkoutRequestID, String merchantTransactionID, String statusCode,
+                                     String statusDescription, String receiptNumber, String currencyCode, Double acknowledgeAmount
+    ) {
+        JSONObject capturePayment = new JSONObject();
+        try {
+            capturePayment.put("checkoutRequestID", checkoutRequestID);
+            capturePayment.put("merchantTransactionID", merchantTransactionID);
+            capturePayment.put("statusCode", statusCode);
+            capturePayment.put("statusDescription", statusDescription);
+            capturePayment.put("receiptNumber", receiptNumber);
+            capturePayment.put("currencyCode", currencyCode);
+            capturePayment.put("acknowledgeAmount", acknowledgeAmount);
+        } catch (NullPointerException | JSONException n) {
+            n.printStackTrace();
+        }
+        return capturePayment.toString();
     }
 
 

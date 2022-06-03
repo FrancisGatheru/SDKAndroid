@@ -1,6 +1,7 @@
 package com.geekwys.checkoutsdk.networkConfig;
 
 
+import static com.geekwys.checkoutsdk.Constants.AUTH;
 import static com.geekwys.checkoutsdk.Constants.CHARSET;
 import static com.geekwys.checkoutsdk.Constants.CONTENT_TYPE;
 
@@ -38,7 +39,7 @@ public class Network extends AsyncTask<String, String, String> {
             connection = (HttpURLConnection) url.openConnection();
 
             StringBuilder st = new StringBuilder();
-            if (endpoint.contains("oauth/token")) {
+            if (endpoint.contains(AUTH)) {
                 connection.setRequestProperty("Content-Type", CONTENT_TYPE);
                 connection.setDoOutput(true);
                 OutputStreamWriter streamWriter = new OutputStreamWriter(connection.getOutputStream());
@@ -62,8 +63,8 @@ public class Network extends AsyncTask<String, String, String> {
                     st.append(inputLine);
                 }
                 in.close();
-                Log.i("POST-CHECKOUT:", "Response received:: " + st);
-            } else if (!endpoint.contains("oauth/token")) {
+                Log.i("CUSTOM-CHECKOUT::", "Response Received:: " + st);
+            } else if (!endpoint.contains(AUTH)) {
                 String bearerToken = st.toString();
                 connection.setRequestProperty("Content-Type", CONTENT_TYPE);
                 connection.setRequestProperty("Authorization", "Bearer " + bearerToken);
@@ -89,7 +90,7 @@ public class Network extends AsyncTask<String, String, String> {
                     st.append(inputLine);
                 }
                 in.close();
-                Log.i("CUSTOM-CHECKOUT:", "Response received:: " + st);
+                Log.i("CUSTOM-CHECKOUT::", "Response received:: " + st);
             }
 
             response = st.toString();
@@ -103,6 +104,7 @@ public class Network extends AsyncTask<String, String, String> {
     public static class execute {
 
         public execute(String url, String endpoint, String payload) {
+            Log.i("CUSTOM-CHECKOUT::", "Posting to URL:: " + url + endpoint + "\n" + "Request Payload:: " + payload);
             new Network().doInBackground(url, endpoint, payload);
         }
     }
