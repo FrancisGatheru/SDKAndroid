@@ -3,13 +3,15 @@ package com.geekwys.checkoutsdk.service;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * @author evil twins
+ */
 public class CheckoutSdk {
 
     /**
      * @param clientId
      * @param clientSecret
-     * @param grantType
-     * build auth payload for bearer token
+     * @param grantType    build auth payload for bearer token
      */
     public String authenticateUser(String clientId, String clientSecret, String grantType) {
 

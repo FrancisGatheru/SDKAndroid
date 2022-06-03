@@ -1,6 +1,5 @@
 package com.geekwys.checkoutsdk;
 
-import static com.geekwys.checkoutsdk.Constants.AUTH;
 import static com.geekwys.checkoutsdk.Constants.BASEURL;
 import static com.geekwys.checkoutsdk.Constants.CLIENT_ID;
 import static com.geekwys.checkoutsdk.Constants.CLIENT_SECRET;
@@ -16,8 +15,8 @@ import com.geekwys.checkoutsdk.networkConfig.Network;
 import com.geekwys.checkoutsdk.service.CheckoutSdk;
 
 /**
-* @author evil twins
-*/
+ * @author evil twins
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
