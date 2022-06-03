@@ -1,5 +1,7 @@
 package com.geekwys.checkoutsdk;
 
+import static com.geekwys.checkoutsdk.Constants.ACK_PAYMENTS;
+import static com.geekwys.checkoutsdk.Constants.AUTH;
 import static com.geekwys.checkoutsdk.Constants.BASEURL;
 import static com.geekwys.checkoutsdk.Constants.CLIENT_ID;
 import static com.geekwys.checkoutsdk.Constants.CLIENT_SECRET;
@@ -47,8 +49,10 @@ public class MainActivity extends AppCompatActivity {
         //make query-payment status request
         String queryStatus = checkoutSdk.queryPaymentStatus("", "", "");
 
-        System.out.println("What the fuck is request: " + queryStatus);
+        //make capture payment/acknowledge request
+        String capture = checkoutSdk.acknowledgePayment("", "", "", "",
+                "", "", 0.0D);
 
-        new Network.execute(BASEURL, POST_CHECKOUT, queryStatus);
+        new Network.execute(BASEURL, POST_CHECKOUT, capture);
     }
 }
