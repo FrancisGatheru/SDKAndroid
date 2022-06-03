@@ -25,42 +25,73 @@ public class Network extends AsyncTask<String, String, String> {
 
     @Override
     protected String doInBackground(String... params) {
-        String response = params[2];
         String baseUrl = params[0];
-        String request = params[1];
+        String endpoint = params[1];
+        String request = params[2];
+
+        String response = null;
 
         try {
             HttpURLConnection connection;
-            URL url = new URL(baseUrl);
+            URL url = new URL(baseUrl + endpoint);
 
             connection = (HttpURLConnection) url.openConnection();
 
-            connection.setDoOutput(true);
-            connection.setRequestProperty("Content-Type", CONTENT_TYPE);
-
-            OutputStreamWriter streamWriter = new OutputStreamWriter(connection.getOutputStream());
-            streamWriter.write(Arrays.toString(request.getBytes(CHARSET)));
-
-            streamWriter.flush();
-            streamWriter.close();
-
-            int responseCode = connection.getResponseCode();
-            InputStreamReader inputStreamReader;
-
-            if (responseCode == 200)
-                inputStreamReader = new InputStreamReader(connection.getInputStream());
-            else
-                inputStreamReader = new InputStreamReader(connection.getErrorStream());
-
-            BufferedReader in = new BufferedReader(inputStreamReader);
-            String inputLine;
-
             StringBuilder st = new StringBuilder();
-            while ((inputLine = in.readLine()) != null) {
-                st.append(inputLine);
+            if (endpoint.contains("oauth/token")) {
+                connection.setRequestProperty("Content-Type", CONTENT_TYPE);
+                connection.setDoOutput(true);
+                OutputStreamWriter streamWriter = new OutputStreamWriter(connection.getOutputStream());
+                streamWriter.write(Arrays.toString(request.getBytes(CHARSET)));
+
+                streamWriter.flush();
+                streamWriter.close();
+
+                int responseCode = connection.getResponseCode();
+                InputStreamReader inputStreamReader;
+
+                if (responseCode == 200)
+                    inputStreamReader = new InputStreamReader(connection.getInputStream());
+                else
+                    inputStreamReader = new InputStreamReader(connection.getErrorStream());
+
+                BufferedReader in = new BufferedReader(inputStreamReader);
+                String inputLine;
+
+                while ((inputLine = in.readLine()) != null) {
+                    st.append(inputLine);
+                }
+                in.close();
+                Log.i("POST-CHECKOUT:", "Response received:: " + st);
+            } else if (!endpoint.contains("oauth/token")) {
+                String bearerToken = st.toString();
+                connection.setRequestProperty("Content-Type", CONTENT_TYPE);
+                connection.setRequestProperty("Authorization", "Bearer " + bearerToken);
+                connection.setDoOutput(true);
+                OutputStreamWriter streamWriter = new OutputStreamWriter(connection.getOutputStream());
+                streamWriter.write(Arrays.toString(request.getBytes(CHARSET)));
+
+                streamWriter.flush();
+                streamWriter.close();
+
+                int responseCode = connection.getResponseCode();
+                InputStreamReader inputStreamReader;
+
+                if (responseCode == 200)
+                    inputStreamReader = new InputStreamReader(connection.getInputStream());
+                else
+                    inputStreamReader = new InputStreamReader(connection.getErrorStream());
+
+                BufferedReader in = new BufferedReader(inputStreamReader);
+                String inputLine;
+
+                while ((inputLine = in.readLine()) != null) {
+                    st.append(inputLine);
+                }
+                in.close();
+                Log.i("CUSTOM-CHECKOUT:", "Response received:: " + st);
             }
-            in.close();
-            Log.i("POST-CHECKOUT:", "Response received:: " + st);
+
             response = st.toString();
         } catch (Exception e) {
             e.printStackTrace();
@@ -71,8 +102,8 @@ public class Network extends AsyncTask<String, String, String> {
 
     public static class execute {
 
-        public execute(String url, String payload, String response) {
-            new Network().doInBackground(url, payload, response);
+        public execute(String url, String endpoint, String payload) {
+            new Network().doInBackground(url, endpoint, payload);
         }
     }
 }
