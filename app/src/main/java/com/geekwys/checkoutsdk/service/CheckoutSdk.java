@@ -24,6 +24,7 @@ public class CheckoutSdk {
             e.printStackTrace();
         }
         return credentials.toString();
+
     }
 
     /**
@@ -116,5 +117,40 @@ public class CheckoutSdk {
         return capturePayment.toString();
     }
 
+    /**
+     * formulate initiate refund payload
+     */
+    public String initiateRefund(String merchantTransactionID, String checkoutRequestID, String refundType,
+                                 Double refundAmount, String currencyCode, String narration, String extraDetails
+    ) {
+        JSONObject initiateRefund = new JSONObject();
+        try {
+            initiateRefund.put("merchantTransactionID", merchantTransactionID);
+            initiateRefund.put("checkoutRequestID", checkoutRequestID);
+            initiateRefund.put("refundType", refundType);
+            initiateRefund.put("refundAmount", refundAmount);
+            initiateRefund.put("currencyCode", currencyCode);
+            initiateRefund.put("narration", narration);
+            initiateRefund.put("extraDetails", extraDetails);
+        } catch (NullPointerException | JSONException n) {
+            n.printStackTrace();
+        }
+        return initiateRefund.toString();
+    }
+
+    /**
+     * formulate cancel refund payload
+     */
+    public String cancelRefund(String merchantTransactionID, String serviceCode, Integer checkoutRequestID) {
+        JSONObject cancelRefund = new JSONObject();
+        try {
+            cancelRefund.put("merchantTransactionID", merchantTransactionID);
+            cancelRefund.put("serviceCode", serviceCode);
+            cancelRefund.put("checkoutRequestID", checkoutRequestID);
+        } catch (NullPointerException | JSONException n) {
+            n.printStackTrace();
+        }
+        return cancelRefund.toString();
+    }
 
 }

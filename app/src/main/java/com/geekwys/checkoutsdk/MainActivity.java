@@ -37,22 +37,6 @@ public class MainActivity extends AppCompatActivity {
         CheckoutSdk checkoutSdk = new CheckoutSdk();
         String authRequest = checkoutSdk.authenticateUser(CLIENT_ID, CLIENT_SECRET, GRANT_TYPE);
 
-        //make post-checkout request
-        String postCheckout = checkoutSdk.postCheckout("", 0.0D, "", "",
-                "", "", "", "", "", "",
-                "", "", "", "", "");
-
-        //make post-charge request
-        String postCharge = checkoutSdk.postCharge("", "", "",
-                "", "", "", "");
-
-        //make query-payment status request
-        String queryStatus = checkoutSdk.queryPaymentStatus("", "", "");
-
-        //make capture payment/acknowledge request
-        String capture = checkoutSdk.acknowledgePayment("", "", "", "",
-                "", "", 0.0D);
-
-        new Network.execute(BASEURL, POST_CHECKOUT, capture);
+        new Network.execute(BASEURL, AUTH, authRequest);
     }
 }

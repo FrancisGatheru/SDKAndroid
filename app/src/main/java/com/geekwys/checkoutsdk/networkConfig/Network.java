@@ -8,6 +8,9 @@ import static com.geekwys.checkoutsdk.Constants.CONTENT_TYPE;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -43,7 +46,7 @@ public class Network extends AsyncTask<String, String, String> {
                 connection.setRequestProperty("Content-Type", CONTENT_TYPE);
                 connection.setDoOutput(true);
                 OutputStreamWriter streamWriter = new OutputStreamWriter(connection.getOutputStream());
-                streamWriter.write(Arrays.toString(request.getBytes(CHARSET)));
+                streamWriter.write(request);
 
                 streamWriter.flush();
                 streamWriter.close();
@@ -63,14 +66,16 @@ public class Network extends AsyncTask<String, String, String> {
                     st.append(inputLine);
                 }
                 in.close();
-                Log.i("CUSTOM-CHECKOUT::", "Response Received:: " + st);
+                JSONObject token = new JSONObject(String.valueOf(st));
+                System.out.println("This is my token:: " + token.get("access_token"));
+                Log.i("AUTH-REQUEST::", "Response Received:: " + st);
             } else if (!endpoint.contains(AUTH)) {
-                String bearerToken = st.toString();
+                String bearerToken = "";
                 connection.setRequestProperty("Content-Type", CONTENT_TYPE);
                 connection.setRequestProperty("Authorization", "Bearer " + bearerToken);
                 connection.setDoOutput(true);
                 OutputStreamWriter streamWriter = new OutputStreamWriter(connection.getOutputStream());
-                streamWriter.write(Arrays.toString(request.getBytes(CHARSET)));
+                streamWriter.write(request);
 
                 streamWriter.flush();
                 streamWriter.close();

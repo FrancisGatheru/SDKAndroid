@@ -12,6 +12,8 @@ public class Constants {
     public static final String POST_CHARGE = "requests/charge";
     public static final String QUERY_PAYMENT_STATUS = "requests/query-status";
     public static final String ACK_PAYMENTS = "requests/acknowledge";
+    public static final String INITIATE_REFUND = "requests/initiate-refund";
+    public static final String CANCEL_REQUEST = "requests/cancel";
     public static final String CLIENT_ID = "ee1a61ae-deab-40c9-b469-e20262625912";
     public static final String CLIENT_SECRET = "kZXarzb1Se5fWwLBUYpFgaTswjgqqq3Zoq3IMZNn";
     public static final String GRANT_TYPE = "client_credentials";
