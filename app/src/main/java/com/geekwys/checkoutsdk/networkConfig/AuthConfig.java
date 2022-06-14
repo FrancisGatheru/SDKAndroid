@@ -15,7 +15,10 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class AuthConfig extends AsyncTask<String, String, String> {
+public class AuthConfig extends AsyncTask<String, String, String> implements Authentication {
+
+    public AuthConfig() {
+    }
 
     @Override
     protected void onPreExecute() {
@@ -62,7 +65,8 @@ public class AuthConfig extends AsyncTask<String, String, String> {
     }
 
     @Override
-    protected void onPostExecute(String result) {
-        super.onPostExecute(result);
+    public void onPostExecute(String baseUrl, String endpoint, String request) {
+        Log.i("CUSTOM-CHECKOUT::", "Posting to URL:: " + baseUrl + endpoint + "\n" + "Request Payload:: " + request);
+        doInBackground(baseUrl, endpoint, request);
     }
 }
