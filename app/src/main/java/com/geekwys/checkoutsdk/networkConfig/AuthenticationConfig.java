@@ -69,10 +69,10 @@ public class AuthenticationConfig extends AsyncTask<String, String, String> impl
     }
 
     @Override
-    public void onPostExecute(String baseUrl, String endpoint, String request) {
+    public String onPostExecute(String baseUrl, String endpoint, String request) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         Log.i("CUSTOM-CHECKOUT::", "Posting to URL:: " + baseUrl + endpoint + "\n" + "Request Payload:: " + request);
-        doInBackground(baseUrl, endpoint, request);
+        return doInBackground(baseUrl, endpoint, request);
     }
 }
