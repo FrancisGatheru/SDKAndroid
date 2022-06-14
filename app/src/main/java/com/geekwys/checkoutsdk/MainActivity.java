@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.geekwys.checkoutsdk.networkConfig.NetworkConfig;
 import com.geekwys.checkoutsdk.service.CheckoutSdk;
 
-import java.util.Date;
 import java.util.UUID;
 
 /**

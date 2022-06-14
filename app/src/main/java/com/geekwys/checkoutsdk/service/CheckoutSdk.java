@@ -3,6 +3,8 @@ package com.geekwys.checkoutsdk.service;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+
 /**
  * @author evil twins
  */
@@ -20,7 +22,7 @@ public class CheckoutSdk {
             credentials.put("grant_type", grantType);
             credentials.put("client_id", clientId);
             credentials.put("client_secret", clientSecret);
-        } catch (Exception e) {
+        } catch (NullPointerException | JSONException e) {
             e.printStackTrace();
         }
         return credentials.toString();
@@ -53,8 +55,8 @@ public class CheckoutSdk {
             postCheckout.put("paymentWebhookUrl", paymentWebhookUrl);
             postCheckout.put("successRedirectUrl", successRedirectUrl);
             postCheckout.put("failRedirectUrl", failRedirectUrl);
-        } catch (NullPointerException | JSONException n) {
-            n.printStackTrace();
+        } catch (NullPointerException | JSONException e) {
+            e.printStackTrace();
         }
         return postCheckout.toString();
     }
@@ -74,8 +76,8 @@ public class CheckoutSdk {
             postCharge.put("currencyCode", currencyCode);
             postCharge.put("payerModeID", payerModeID);
             postCharge.put("languageCode", languageCode);
-        } catch (NullPointerException | JSONException n) {
-            n.printStackTrace();
+        } catch (NullPointerException | JSONException e) {
+            e.printStackTrace();
         }
         return postCharge.toString();
     }
@@ -90,8 +92,8 @@ public class CheckoutSdk {
             queryStatus.put("merchantTransactionID", merchantTransactionID);
             queryStatus.put("serviceCode", serviceCode);
             queryStatus.put("checkoutRequestID", checkoutRequestID);
-        } catch (NullPointerException | JSONException n) {
-            n.printStackTrace();
+        } catch (NullPointerException | JSONException e) {
+            e.printStackTrace();
         }
         return queryStatus.toString();
     }
@@ -111,8 +113,8 @@ public class CheckoutSdk {
             capturePayment.put("receiptNumber", receiptNumber);
             capturePayment.put("currencyCode", currencyCode);
             capturePayment.put("acknowledgeAmount", acknowledgeAmount);
-        } catch (NullPointerException | JSONException n) {
-            n.printStackTrace();
+        } catch (NullPointerException | JSONException e) {
+            e.printStackTrace();
         }
         return capturePayment.toString();
     }
@@ -132,8 +134,8 @@ public class CheckoutSdk {
             initiateRefund.put("currencyCode", currencyCode);
             initiateRefund.put("narration", narration);
             initiateRefund.put("extraDetails", extraDetails);
-        } catch (NullPointerException | JSONException n) {
-            n.printStackTrace();
+        } catch (NullPointerException | JSONException e) {
+            e.printStackTrace();
         }
         return initiateRefund.toString();
     }
@@ -147,8 +149,8 @@ public class CheckoutSdk {
             cancelRefund.put("merchantTransactionID", merchantTransactionID);
             cancelRefund.put("serviceCode", serviceCode);
             cancelRefund.put("checkoutRequestID", checkoutRequestID);
-        } catch (NullPointerException | JSONException n) {
-            n.printStackTrace();
+        } catch (NullPointerException | JSONException e) {
+            e.printStackTrace();
         }
         return cancelRefund.toString();
     }

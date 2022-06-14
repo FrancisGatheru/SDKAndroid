@@ -9,11 +9,8 @@ import static com.geekwys.checkoutsdk.Constants.CONTENT_TYPE;
 import static com.geekwys.checkoutsdk.Constants.GRANT_TYPE;
 
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.StrictMode;
 import android.util.Log;
-
-import androidx.annotation.RequiresApi;
 
 import com.geekwys.checkoutsdk.service.CheckoutSdk;
 
@@ -24,7 +21,6 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-
 /**
  * @author evil twins
  */
@@ -33,7 +29,6 @@ public class NetworkConfig extends AsyncTask<String, String, String> implements 
     public NetworkConfig() {
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected String doInBackground(String... params) {
         try {
