@@ -16,9 +16,12 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class AuthConfig extends AsyncTask<String, String, String> implements Authentication {
+/**
+ * @author evil twins
+ */
+public class AuthenticationConfig extends AsyncTask<String, String, String> implements Network {
 
-    public AuthConfig() {
+    public AuthenticationConfig() {
     }
 
     @Override
