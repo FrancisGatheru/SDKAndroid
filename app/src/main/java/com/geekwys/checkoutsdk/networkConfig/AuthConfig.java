@@ -3,6 +3,7 @@ package com.geekwys.checkoutsdk.networkConfig;
 import static com.geekwys.checkoutsdk.Constants.CONTENT_TYPE;
 
 import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -66,6 +67,8 @@ public class AuthConfig extends AsyncTask<String, String, String> implements Aut
 
     @Override
     public void onPostExecute(String baseUrl, String endpoint, String request) {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         Log.i("CUSTOM-CHECKOUT::", "Posting to URL:: " + baseUrl + endpoint + "\n" + "Request Payload:: " + request);
         doInBackground(baseUrl, endpoint, request);
     }

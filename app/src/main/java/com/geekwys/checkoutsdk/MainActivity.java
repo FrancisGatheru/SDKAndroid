@@ -32,14 +32,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void makeCall() {
-//        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-//        StrictMode.setThreadPolicy(policy);
-
         //make auth call
         CheckoutSdk checkoutSdk = new CheckoutSdk();
         String authRequest = checkoutSdk.authenticateUser(CLIENT_ID, CLIENT_SECRET, GRANT_TYPE);
 
-        new AuthConfig.execute();
-        new Network.execute(BASEURL, AUTH, authRequest);
+        new AuthConfig().onPostExecute(BASEURL, AUTH, authRequest);
     }
 }
