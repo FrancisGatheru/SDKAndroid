@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.geekwys.checkoutsdk.networkConfig.Network;
 import com.geekwys.checkoutsdk.networkConfig.NetworkConfig;
 import com.geekwys.checkoutsdk.service.CheckoutSdk;
 
@@ -26,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void makeCall() {
-        //make auth call
         CheckoutSdk checkoutSdk = new CheckoutSdk();
         String postCheckout = checkoutSdk.postCheckout(
                 UUID.randomUUID().toString(), 1000D, "KES", "SH3M",

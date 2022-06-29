@@ -14,7 +14,7 @@ public class Constants {
     public static final String ACK_PAYMENTS = "requests/acknowledge";
     public static final String INITIATE_REFUND = "requests/initiate-refund";
     public static final String CANCEL_REQUEST = "requests/cancel";
-    public static final String CLIENT_ID = "ee1a61ae-deab-40c9-b469-e20262625912";
-    public static final String CLIENT_SECRET = "kZXarzb1Se5fWwLBUYpFgaTswjgqqq3Zoq3IMZNn";
+    public static final String CLIENT_ID = "ea2289df-54e3-433e-89ad-0bdf959b71f6";
+    public static final String CLIENT_SECRET = "UFc98LoGDo21ZGE7pOwoI68JjU1oWv3KX5guVKc8";
     public static final String GRANT_TYPE = "client_credentials";
 }
