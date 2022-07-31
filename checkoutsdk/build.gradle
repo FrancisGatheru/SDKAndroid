@@ -35,12 +35,12 @@ afterEvaluate {
     println("Components: " + components*.name)
     publishing {
         publications {
-            release(MavenPublication) {
-                from components.debug
-
+            mavenJava(MavenPublication) {
                 groupId = 'com.github.FrancisGatheru'
                 artifactId = "$project.name"
                 version = '0.0.4'
+
+                from components.debug
             }
         }
     }
