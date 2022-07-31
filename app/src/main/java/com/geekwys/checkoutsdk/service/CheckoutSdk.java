@@ -1,9 +1,11 @@
 package com.geekwys.checkoutsdk.service;
 
+import android.util.Log;
+
+import com.geekwys.checkoutsdk.model.Authentication;
+
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.IOException;
 
 /**
  * @author evil twins
@@ -12,21 +14,26 @@ public class CheckoutSdk {
 
     /**
      * @param clientId
-     * @param clientSecret
-     * @param grantType    build auth payload for bearer token
+     * @param clientSecret build auth payload for bearer token
+     * @param grantType    remains as const - client_credentials
      */
     public String authenticateUser(String clientId, String clientSecret, String grantType) {
+        Authentication.setClientId(clientId);
+        Authentication.setClientSecret(clientSecret);
+        Authentication.setGrantType(grantType);
 
-        JSONObject credentials = new JSONObject();
+        JSONObject userAuthDetails = new JSONObject();
+
         try {
-            credentials.put("grant_type", grantType);
-            credentials.put("client_id", clientId);
-            credentials.put("client_secret", clientSecret);
+            userAuthDetails.put("client_id", Authentication.getClientId());
+            userAuthDetails.put("client_secret", Authentication.getClientSecret());
+            userAuthDetails.put("grant_type", Authentication.getGrantType());
         } catch (NullPointerException | JSONException e) {
             e.printStackTrace();
         }
-        return credentials.toString();
 
+        Log.i("Authentication Payload", "Built Auth Payload: " + userAuthDetails);
+        return userAuthDetails.toString();
     }
 
     /**
