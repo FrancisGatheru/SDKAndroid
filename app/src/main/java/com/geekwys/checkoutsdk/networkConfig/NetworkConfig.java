@@ -3,15 +3,13 @@ package com.geekwys.checkoutsdk.networkConfig;
 
 import static com.geekwys.checkoutsdk.Constants.AUTH;
 import static com.geekwys.checkoutsdk.Constants.BASEURL;
-import static com.geekwys.checkoutsdk.Constants.CLIENT_ID;
-import static com.geekwys.checkoutsdk.Constants.CLIENT_SECRET;
 import static com.geekwys.checkoutsdk.Constants.CONTENT_TYPE;
-import static com.geekwys.checkoutsdk.Constants.GRANT_TYPE;
 
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.util.Log;
 
+import com.geekwys.checkoutsdk.model.Authentication;
 import com.geekwys.checkoutsdk.service.CheckoutSdk;
 
 import java.io.BufferedReader;
@@ -27,6 +25,7 @@ import java.net.URL;
 public class NetworkConfig extends AsyncTask<String, String, String> implements Network {
 
     public NetworkConfig() {
+
     }
 
     @Override
@@ -38,7 +37,7 @@ public class NetworkConfig extends AsyncTask<String, String, String> implements 
             //get access token to set as authorization header
             String accessToken = new AuthenticationConfig().onPostExecute(
                     BASEURL, AUTH, new CheckoutSdk().authenticateUser(
-                            CLIENT_ID, CLIENT_SECRET, GRANT_TYPE
+                            Authentication.getClientId(), Authentication.getClientSecret(), Authentication.getGrantType()
                     )
             );
 
