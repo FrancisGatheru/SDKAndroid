@@ -37,7 +37,7 @@ afterEvaluate {
             release(MavenPublication) {
                 from components.debug
 
-                groupId = 'com.github.ShemBrooklyne'
+                groupId = 'com.github.FrancisGatheru'
                 artifactId = "$project.name"
                 version = '0.0.0'
             }
