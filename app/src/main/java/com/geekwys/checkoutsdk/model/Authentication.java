@@ -1,5 +1,8 @@
 package com.geekwys.checkoutsdk.model;
 
+/**
+ * @author evil twins
+ */
 public class Authentication {
     public static String clientId;
     public static String clientSecret;
