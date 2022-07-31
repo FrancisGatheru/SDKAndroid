@@ -82,7 +82,6 @@ public class NetworkConfig extends AsyncTask<String, String, String> implements 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         Log.i("CUSTOM-CHECKOUT::", "Posting to URL:: " + baseUrl + endpoint + "\n" + "Request Payload:: " + request);
-        doInBackground(baseUrl, endpoint, request);
-        return "";
+        return doInBackground(baseUrl, endpoint, request);
     }
 }
