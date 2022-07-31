@@ -35,6 +35,8 @@ android {
     packagingOptions {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
+            exclude 'META-INF/NOTICE'
+            exclude 'META-INF/LICENSE'
         }
     }
 }
@@ -42,5 +44,5 @@ android {
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.6.1'
-    //implementation(':checkoutsdk') //added sdk module on app level
+    implementation 'com.android.support:support-v4:32.0.0'
 }
