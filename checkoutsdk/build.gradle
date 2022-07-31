@@ -40,7 +40,7 @@ afterEvaluate {
 
                 groupId = 'com.github.FrancisGatheru'
                 artifactId = "$project.name"
-                version = '0.0.0'
+                version = '0.0.4'
             }
         }
     }

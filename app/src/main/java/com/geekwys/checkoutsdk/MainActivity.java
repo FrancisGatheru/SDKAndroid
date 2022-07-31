@@ -10,8 +10,6 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.geekwys.checkoutsdk.model.Authentication;
-import com.geekwys.checkoutsdk.networkConfig.Network;
 import com.geekwys.checkoutsdk.networkConfig.NetworkConfig;
 import com.geekwys.checkoutsdk.service.CheckoutSdk;
 
