@@ -1,16 +1,13 @@
 package com.geekwys.checkoutsdk.networkConfig;
 
-
-import static com.geekwys.checkoutsdk.Constants.AUTH;
-import static com.geekwys.checkoutsdk.Constants.BASEURL;
 import static com.geekwys.checkoutsdk.Constants.CONTENT_TYPE;
 
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.util.Log;
 
-import com.geekwys.checkoutsdk.model.Authentication;
-import com.geekwys.checkoutsdk.service.CheckoutSdk;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,35 +19,26 @@ import java.net.URL;
 /**
  * @author evil twins
  */
-public class NetworkConfig extends AsyncTask<String, String, String> implements Network {
+public class AuthenticationConfig extends AsyncTask<String, String, String> implements Network {
 
-    public NetworkConfig() {
-
+    public AuthenticationConfig() {
     }
 
     @Override
-    protected String doInBackground(String... params) {
+    protected void onPreExecute() {
+        super.onPreExecute();
+    }
+
+    @Override
+    protected String doInBackground(String... strings) {
+        String accessToken = null;
         try {
-            URL url = new URL(params[0] + params[1]);
+            URL url = new URL(strings[0] + strings[1]);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-            //get access token to set as authorization header
-            String accessToken = new AuthenticationConfig().onPostExecute(
-                    BASEURL, AUTH, new CheckoutSdk().authenticateUser(
-                            Authentication.getClientId(), Authentication.getClientSecret(), Authentication.getGrantType()
-                    )
-            );
-
-            if (accessToken.isEmpty()) {
-                Log.w("AUH-REQUEST", "Access token is null");
-            }
-
-            connection.setRequestProperty("Content-Type", CONTENT_TYPE);
-            connection.setRequestProperty("Authorization", "Bearer " + accessToken);
             connection.setDoOutput(true);
+            connection.setRequestProperty("Content-Type", CONTENT_TYPE);
             OutputStreamWriter streamWriter = new OutputStreamWriter(connection.getOutputStream());
-            streamWriter.write(params[2]);
-
+            streamWriter.write(strings[2]);
             streamWriter.close();
 
             int responseCode = connection.getResponseCode();
@@ -69,12 +57,15 @@ public class NetworkConfig extends AsyncTask<String, String, String> implements 
                 st.append(inputLine);
             }
             in.close();
-            Log.i("CUSTOM-CHECKOUT::", "Response received:: " + st);
-        } catch (IOException | NullPointerException e) {
-            e.printStackTrace();
-        }
+            JSONObject bearToken = new JSONObject(String.valueOf(st));
+            Log.i("AUTH-REQUEST::", "Response Received:: " + st);
 
-        return null;
+            //extract access token from parent object
+            accessToken = bearToken.get("access_token").toString();
+        } catch (NullPointerException | IOException | JSONException exception) {
+            exception.printStackTrace();
+        }
+        return accessToken;
     }
 
     @Override
