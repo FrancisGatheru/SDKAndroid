@@ -29,6 +29,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.android.support:support-v4:32.0.0'
 }
 
 afterEvaluate {
@@ -38,7 +39,7 @@ afterEvaluate {
             mavenJava(MavenPublication) {
                 groupId = 'com.github.FrancisGatheru'
                 artifactId = "$project.name"
-                version = '0.0.4'
+                version = '0.0.6'
 
                 from components.debug
             }
