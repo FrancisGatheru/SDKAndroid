@@ -3,6 +3,12 @@ plugins {
     id 'maven-publish'
 }
 
+configurations.all {
+    resolutionStrategy {
+        force 'com.android.support:support-v4:32.1.0'
+    }
+}
+
 android {
     compileSdk 32
 
@@ -28,8 +34,13 @@ android {
     }
 }
 
+configurations.all {
+    resolutionStrategy {
+        force 'com.android.support:support-v4:32.1.0'
+    }
+}
+
 dependencies {
-    implementation 'com.android.support:support-v4:32.0.0'
 }
 
 afterEvaluate {
