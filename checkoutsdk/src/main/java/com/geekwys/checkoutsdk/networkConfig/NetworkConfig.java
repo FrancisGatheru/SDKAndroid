@@ -69,7 +69,8 @@ public class NetworkConfig extends AsyncTask<String, String, String> implements 
                 st.append(inputLine);
             }
             in.close();
-            Log.i("CUSTOM-CHECKOUT::", "Response received:: " + st);
+            String logTag = params[1].replace("requests/", "");
+            Log.i(String.format("%s::", logTag), "Response received:: " + st);
         } catch (IOException | NullPointerException e) {
             e.printStackTrace();
         }
@@ -81,7 +82,8 @@ public class NetworkConfig extends AsyncTask<String, String, String> implements 
     public String onPostExecute(String baseUrl, String endpoint, String request) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        Log.i("CUSTOM-CHECKOUT::", "Posting to URL:: " + baseUrl + endpoint + "\n" + "Request Payload:: " + request);
+        String logTag = endpoint.replace("requests/", "");
+        Log.i(String.format("%s::", logTag), "Posting to URL:: " + baseUrl + endpoint + "\n" + "Request Payload:: " + request);
         return doInBackground(baseUrl, endpoint, request);
     }
 }
