@@ -70,7 +70,7 @@ public class NetworkConfig extends AsyncTask<String, String, String> implements 
             }
             in.close();
             String logTag = params[1].replace("requests/", "");
-            Log.i(String.format("%s::", logTag), "Response received:: " + st);
+            Log.i(String.format("%s::", logTag), "The response received:: " + st);
         } catch (IOException | NullPointerException e) {
             e.printStackTrace();
         }
